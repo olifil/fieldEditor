@@ -9,7 +9,8 @@
     </ng-template>
     <ng-template #popContent><span [innerHTML]="helpContent"></span></ng-template>
 
-    <button type="button"
+    <button *ngIf="helpContent"
+         type="button"
         class="btn btn-link"
         [ngbPopover]="popContent"
         [popoverTitle]="popTitle"><i class="fas fa-fw fa-info-circle"></i></button>

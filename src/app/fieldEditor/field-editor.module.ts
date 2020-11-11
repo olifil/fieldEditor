@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FieldEditorComponent } from './_components/field-editor/field-editor.component';
-import { HeaderComponent } from './_components/field-editor/header/header.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { FieldEditorComponent } from './_components/field-editor.component';
+import { HeaderComponent } from './_components/header/header.component';
+import { FooterComponent } from './_components/footer/footer.component';
+
 
 @NgModule({
   declarations: [
     FieldEditorComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

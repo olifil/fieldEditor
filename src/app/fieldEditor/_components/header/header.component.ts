@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { EditorModeService } from '../../_services/editor-mode.service';
 
 @Component({
   selector: 'field-editor-header',
@@ -16,17 +17,6 @@ export class HeaderComponent implements OnInit {
 
             if (typeof this.helpTitle === "undefined" || this.helpTitle === null) this.helpTitle = this._title;
         }
-    
-    /**
-     * The editor mode
-     * @var {boolean} mode Default false - true : edit mode ; false : view mode
-     */
-    @Input() 
-        get editorMode(): boolean { return this._editorMode; }
-        set editorMode(mode: boolean) {
-            this._editorMode = mode;
-            this.editorModeEvent.emit(this.editorMode);
-        }
 
     @Input()
         get helpTitle(): string { return this._helpTitle; }
@@ -40,7 +30,10 @@ export class HeaderComponent implements OnInit {
             this._helpContent = content;
         }
 
-    @Output() editorModeEvent = new EventEmitter<boolean>();
+    get editorMode(): boolean { return this._editorMode; }
+    set editorMode(mode: boolean) {
+        this._editorMode = mode;
+    }
 
     private _title: string;
     private _editorMode: boolean;
@@ -48,11 +41,19 @@ export class HeaderComponent implements OnInit {
     private _helpTitle: string;
     private _helpContent: string;
 
-    constructor() { }
+    constructor(
+        private modeService: EditorModeService,
+    ) {
+        this.modeService.setMode(false);
+    }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.modeService.mode.subscribe(
+            (mode: boolean) => this.editorMode = mode
+        )
+    }
 
     onUpdateMode(e: Event) {
-        this.editorMode = !this.editorMode;
+        this.modeService.setMode(true);
     }
 }
