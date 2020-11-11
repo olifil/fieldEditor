@@ -1,0 +1,21 @@
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+header {
+    margin-bottom: 10px;
+    
+    & p {
+        margin: 0;
+        border-bottom: 1px dotted silver;
+        
+        font-size: 1.3rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+}
+
+.popover-header {
+    & i { margin-right: 5px; }
+}
